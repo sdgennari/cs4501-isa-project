@@ -33,7 +33,4 @@ before_script:
 - ls app
 
 script:
-- >
-  docker exec -it web bash -c "
-  cd sampleProject &&
-  python manage.py test"
+- docker exec -it web bash -c "ls"
