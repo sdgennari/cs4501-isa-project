@@ -13,7 +13,7 @@ before_install:
 - docker pull tp33/django
 - docker pull mysql:5.7.14
 - mkdir test-db
-- docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -v ~/test-db:/var/lib/mysql mysql:5.7.14;
+- docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -v `pwd`/test-db:/var/lib/mysql mysql:5.7.14;
 - sleep 20
 - >
   docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14
@@ -25,12 +25,14 @@ before_install:
     grant all on cs4501.* to 'www'@'%';
     grant all on test_cs4501.* to 'www'@'%';"
 - docker ps -a
+- pwd
 
 before_script:
 # TODO: Use docker-compose with multiple containers
-- docker run -it --name web --detach --link mysql-test:db -v ~/app:/app tp33/django
+- docker run -it --name web --detach --link mysql-test:db -v `pwd`/app:/app tp33/django
 - docker ps -a
 - ls app
+- pwd
 
 script:
-- docker exec -it web bash -c "ls"
+- docker exec -it web bash -c "cs sampleProject"
