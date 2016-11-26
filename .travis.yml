@@ -31,9 +31,9 @@ before_install:
     grant all on test_cs4501.* to 'www'@'%';"
 
 before_script:
-# TODO: Use docker-compose with multiple containers
-- docker run -it --name web --detach --link mysql-test:db -v `pwd`/app:/app tp33/django
-- docker ps -a
+- docker-compose up -d
+# - docker run -it --name web --detach --link mysql-test:db -v `pwd`/app:/app tp33/django
+# - docker ps -a
 
 script:
 # Run tests with --noinput to prevent the build from hanging

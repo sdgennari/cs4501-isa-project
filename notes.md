@@ -19,8 +19,9 @@
 - In web container:
 	- `cd sampleProject`
 	- `python manage.py test`
+		- Note: Use `--noinput` when running tests to automatically delete test db
 - Single line:
-	- `docker exec -it web bash -c "cd sampleProject && python manage.py test"`
+	- `docker exec -it web bash -c "cd sampleProject && python manage.py test --noinput"`
 
 # Helpful Info
 - `docker logs <container_name>`

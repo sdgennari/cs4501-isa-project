@@ -1,0 +1,10 @@
+web:
+  image: tp33/django
+  external_links:
+    - mysql:db
+  volumes:
+    - ./app:/app
+  command: >
+          bash -c "cd sampleProject/ &&
+                  python manage.py migrate &&
+                  mod_wsgi-express start-server --working-directory /app/sampleProject/ /app/sampleProject/sampleProject/wsgi.py"
