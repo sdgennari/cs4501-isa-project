@@ -14,6 +14,11 @@
 	- `python manage.py migrate`
 	- `mod_wsgi-express start-server --working-directory /app/sampleProject/ /app/sampleProject/sampleProject/wsgi.py &`
 
+# Running tests
+- `docker exec -it web bash`
+- In web container:
+	- `cd sampleProject`
+	- `python manage.py test`
 
 # Helpful Info
 - `docker logs <container_name>`
@@ -39,4 +44,4 @@ Single Line Version:
 
 Using commands after docker run:
 
-docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14 mysql -uroot -p'$3cureUS' -h db --verbose --execute="create database cs4501 character set utf8; create database test_cs4501 character set utf8; create user 'www'@'%' identified by '$3cureUS'; grant all on cs4501.* to 'www'@'%'; grant all on test_cs4501.* to 'www'@'%';"
+`docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14 mysql -uroot -p'$3cureUS' -h db --verbose --execute="create database cs4501 character set utf8; create database test_cs4501 character set utf8; create user 'www'@'%' identified by '$3cureUS'; grant all on cs4501.* to 'www'@'%'; grant all on test_cs4501.* to 'www'@'%';"`
