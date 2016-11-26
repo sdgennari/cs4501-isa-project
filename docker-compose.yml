@@ -2,6 +2,7 @@ web:
   image: tp33/django
   external_links:
     - mysql-test:db
+  container_name: web_container
   volumes:
     - ./app:/app
   command: >
