@@ -12,14 +12,14 @@ before_install:
 - docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -v ~/test-db:/var/lib/mysql mysql:5.7.14;
 - sleep 20
 - >
-	docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14
-	mysql -uroot -p'$3cureUS' -h db --verbose
-	--execute="
-		create database cs4501 character set utf8;
-		create database test_cs4501 character set utf8;
-		create user 'www'@'%' identified by '\$3cureUS';
-		grant all on cs4501.* to 'www'@'%';
-		grant all on test_cs4501.* to 'www'@'%';"
+  docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14
+  mysql -uroot -p'$3cureUS' -h db --verbose
+  --execute="
+    create database cs4501 character set utf8;
+    create database test_cs4501 character set utf8;
+    create user 'www'@'%' identified by '\$3cureUS';
+    grant all on cs4501.* to 'www'@'%';
+    grant all on test_cs4501.* to 'www'@'%';"
 - docker ps -a
 
 before_script:
