@@ -1,3 +1,4 @@
+# Based on Travis docker example: https://docs.travis-ci.com/user/docker/
 sudo: required
 
 language: python
@@ -10,11 +11,15 @@ services:
 - docker
 
 before_install:
+# Pull the docker images
 - docker pull tp33/django
 - docker pull mysql:5.7.14
+# Make the mysql container
 - mkdir test-db
-- docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -v ./test-db:/var/lib/mysql mysql:5.7.14;
+- docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -v `pwd`/test-db:/var/lib/mysql mysql:5.7.14;
+# Wait for the mysql container to initalize
 - sleep 20
+# Create the databases and user
 - >
   docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14
   mysql -uroot -p'$3cureUS' -h db --verbose
@@ -27,7 +32,7 @@ before_install:
 
 before_script:
 # TODO: Use docker-compose with multiple containers
-- docker run -it --name web --detach --link mysql-test:db -v ./app:/app tp33/django
+- docker run -it --name web --detach --link mysql-test:db -v `pwd`/app:/app tp33/django
 - docker ps -a
 
 script:
