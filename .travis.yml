@@ -1,14 +1,15 @@
 sudo: required
 
-langauge: python
+language: python
 
 services:
-  - docker
+- docker
 
 before_install:
 - docker pull tp33/django
 - docker pull mysql:5.7.14
 - mkdir test-db
 - docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -e MYSQL_USER='www' -e MYSQL_PASSWORD='$3cureUS' -e MYSQL_DATABASE='cs4501' -v ~/test-db:/var/lib/mysql mysql:5.7.14;
+- sleep 15
+- docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14 mysql -uroot -p'$3cureUS' -h db --verbose --execute="create database cs4501 character set utf8; create database test_cs4501 character set utf8; create user 'www'@'%' identified by '$3cureUS'; grant all on cs4501.* to 'www'@'%'; grant all on test_cs4501.* to 'www'@'%';"
 - docker ps -a
-# - docker run -it --name mysql-test-cmdline --link mysql-test:db mysql:5.7.14 /bin/bash

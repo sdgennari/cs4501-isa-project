@@ -28,10 +28,15 @@ docker run --name mysql-test --detach \
 	-e MYSQL_USER='www' \
 	-e MYSQL_PASSWORD='$3cureUS' \
 	-e MYSQL_DATABASE='cs4501' \
+	-e MYSQL_DATABASE='test_cs4501' \
 	-v C:/Users/sdgennari/cs4501/test-db:/var/lib/mysql \
 	mysql:5.7.14;
 ```
 
 Single Line Version:
 
-`docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -e MYSQL_USER='www' -e MYSQL_PASSWORD='$3cureUS' -e MYSQL_DATABASE='cs4501' -v C:/Users/sdgennari/cs4501/test-db:/var/lib/mysql mysql:5.7.14;`
+`docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -e MYSQL_USER='www' -e MYSQL_PASSWORD='$3cureUS' -e MYSQL_DATABASE='cs4501' -e MYSQL_DATABASE='test_cs4501' -v C:/Users/sdgennari/cs4501/test-db:/var/lib/mysql mysql:5.7.14;`
+
+Using commands after docker run:
+
+docker run -it --name mysql-test-cmdline --rm --link mysql-test:db mysql:5.7.14 mysql -uroot -p'$3cureUS' -h db --verbose --execute="create database cs4501 character set utf8; create database test_cs4501 character set utf8; create user 'www'@'%' identified by '$3cureUS'; grant all on cs4501.* to 'www'@'%'; grant all on test_cs4501.* to 'www'@'%';"
