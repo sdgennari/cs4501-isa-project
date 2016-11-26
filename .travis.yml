@@ -2,6 +2,10 @@ sudo: required
 
 language: python
 
+# Disable email notifications
+notifications:
+  email: false
+
 services:
 - docker
 
@@ -21,11 +25,13 @@ before_install:
     grant all on cs4501.* to 'www'@'%';
     grant all on test_cs4501.* to 'www'@'%';"
 - docker ps -a
+- ls
 
 before_script:
 # TODO: Use docker-compose with multiple containers
 - docker run -it --name web --detach --link mysql-test:db -v ~/app:/app tp33/django
 - docker ps -a
+- ls
 
-script:
-- docker exec -it web bash -c "cd sampleProject && python manage.py test"
+# script:
+# - docker exec -it web bash -c "cd sampleProject && python manage.py test"
