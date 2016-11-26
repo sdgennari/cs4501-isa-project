@@ -19,6 +19,8 @@
 - In web container:
 	- `cd sampleProject`
 	- `python manage.py test`
+- Single line:
+	- `docker exec -it web bash -c "cd sampleProject && python manage.py test"`
 
 # Helpful Info
 - `docker logs <container_name>`
