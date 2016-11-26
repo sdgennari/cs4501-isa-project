@@ -19,3 +19,19 @@
 - `docker logs <container_name>`
 	- Show logs for container
 	- Useful when debugging why a container did not start
+
+# MySQL Container configuration
+
+```
+docker run --name mysql-test --detach \
+	-e MYSQL_ROOT_PASSWORD='$3cureUS' \
+	-e MYSQL_USER='www' \
+	-e MYSQL_PASSWORD='$3cureUS' \
+	-e MYSQL_DATABASE='cs4501' \
+	-v C:/Users/sdgennari/cs4501/test-db:/var/lib/mysql \
+	mysql:5.7.14;
+```
+
+Single Line Version:
+
+`docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -e MYSQL_USER='www' -e MYSQL_PASSWORD='$3cureUS' -e MYSQL_DATABASE='cs4501' -v C:/Users/sdgennari/cs4501/test-db:/var/lib/mysql mysql:5.7.14;`

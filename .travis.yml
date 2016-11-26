@@ -8,6 +8,7 @@ services:
 before_install:
 - docker pull tp33/django
 - docker pull mysql:5.7.14
-- mkdir db
-- docker run --name mysql -d -e MYSQL_ROOT_PASSWORD='$3cureUS' -v ~/db:/var/lib/mysql mysql:5.7.14
+- mkdir test-db
+- docker run --name mysql-test --detach -e MYSQL_ROOT_PASSWORD='$3cureUS' -e MYSQL_USER='www' -e MYSQL_PASSWORD='$3cureUS' -e MYSQL_DATABASE='cs4501' -v ~/test-db:/var/lib/mysql mysql:5.7.14;
 - docker ps -a
+# - docker run -it --name mysql-test-cmdline --link mysql-test:db mysql:5.7.14 /bin/bash
